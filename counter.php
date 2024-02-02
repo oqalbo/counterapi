@@ -1,10 +1,3 @@
-<?php
-
-// Define the file to store the count
-$countFile = 'count.txt';
-
-// Define the expected header key
-$expectedHeaderKey = getenv('EXPECTED_HEADER_KEY');
 
 // Check if the file exists, create it if not
 if (!file_exists($countFile)) {
@@ -27,10 +20,8 @@ $newCount = intval($currentCount) + 1;
 // Update the file with the new count
 file_put_contents($countFile, $newCount);
 
-// Prepare and send a simple JSON response
-$response = [
-    'count' => $newCount
-];
+// Set the Content-Type header to text/html
+header('Content-Type: text/html');
 
-header('Content-Type: application/json');
-echo json_encode($response);
+// Output the count as HTML
+echo "<h1>Count: $newCount</h1>";
